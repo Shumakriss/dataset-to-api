@@ -13,7 +13,7 @@ Here's a link to the dataset data dictionary that also includes the S3 links for
 
 ## Installation
 1. Open your terminal
-2. Clone the repo `git clone git:shumakriss/dataset-to-api.git`
+2. Clone the repo `git clone git@github.com:Shumakriss/dataset-to-api.git`
 3. Change directories `cd dataset-to-api`
 4. Launch the Docker containers `docker-compose up --build`
 5. Open your browser
@@ -99,7 +99,7 @@ Additional Requirements
 
 #### Instructions
 1. Open your terminal
-2. Clone the repo `git clone git:shumakriss/dataset-to-api.git`
+2. Clone the repo `git clone git@github.com:Shumakriss/dataset-to-api.git`
 3. Change directories to 'processor' folder `cd dataset-to-api/processor`
 4. Install dependencies `pip3 install --no-cache-dir -r requirements.txt`
 5. Change directories to 'web' folder `cd ../web`
