@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+
+  web:
+    build: web
+    command: "python3 web.py"
+    depends_on:
+      - db
+    environment:
+      - CONNECT_STRING=dbname=postgres user=postgres host=db port=5432
+    ports:
+     - "8081:8081"
+
+  processor:
+    build: processor
+    command: "python3 processor.py"
+    depends_on:
+      - db
+    environment:
+      - DATASET_BUCKET=amazon-reviews-pds
+      - REMOTE_FILEPATH=tsv/amazon_reviews_us_Home_v1_00.tsv.gz
+      - CONNECT_STRING=dbname=postgres user=postgres host=db port=5432
+      - DATA_DIR=.
+      - LANG=en_US.utf-8
+      - LC_ALL=en_US.utf-8
+
+  db:
+    image: postgres:latest
+    hostname: db
+    ports:
+      - "5432"
+    expose:
+      - "5432"
