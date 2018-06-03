@@ -145,8 +145,10 @@ ports:
 ```
 
 ### Possible Improvements & Features
+* Data quality (consistency checks, duplicates, format validation, etc.)
 * Integrate a more complete stack (API Gateway, user management, secrets management, etc.)
 * Supplement data (average star rating, rating histograms, top customers, etc.)
 * Further automated testing
 * Performance profiling & tuning
 * Additional product category datasets
+
