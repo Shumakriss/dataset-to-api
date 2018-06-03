@@ -66,6 +66,8 @@ def split_file(local_filename, num_files):
     for file in split_files:
         file.close()
 
+    logging.info("Split filenames to %s" % split_filenames)
+
     return split_filenames
 
 
@@ -77,15 +79,7 @@ def read_chunk(file, chunk_size=10000):
         chunk.append(line)
         line = file.readline()
         i = i + 1
-
     return chunk
-
-
-def process_chunk(raw_chunk):
-    clean_chunk = []
-    for record in raw_chunk:
-        clean_chunk.append(record)
-    return clean_chunk
 
 
 def write_chunk(cur, conn, clean_chunk):
@@ -102,12 +96,12 @@ def worker(filename, connect_string):
     conn = psycopg2.connect(connect_string)
     cur = conn.cursor()
 
-    raw_chunk = read_chunk(dataset_file)
-    while len(raw_chunk) > 0:
-        clean_chunk = process_chunk(raw_chunk)
-        write_chunk(cur, conn, clean_chunk)
-        raw_chunk = read_chunk(dataset_file)
-
+    logging.info("Starting to read and write chunks")
+    chunk = read_chunk(dataset_file)
+    while len(chunk) > 0:
+        write_chunk(cur, conn, chunk)
+        chunk = read_chunk(dataset_file)
+    logging.info("Finished writing all chunks")
     cur.close()
     conn.close()
 
