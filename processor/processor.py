@@ -114,9 +114,9 @@ def worker(filename, connect_string):
 
 def main(bucket, remote_filename, data_dir, connect_string,  num_threads=3):
     logging.info("Processor starting")
-    db_initializer.setup_database(connect_string)
     extracted_filename = download(bucket, remote_filename, data_dir)
     split_filenames = split_file(extracted_filename, num_threads)
+    db_initializer.setup_database(connect_string)
     threads = []
     for filename in split_filenames:
         t = Process(target=worker, args=(filename, connect_string))
